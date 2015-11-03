@@ -1,7 +1,15 @@
-require "fog/akamai/version"
+require 'fog/core'
+require 'fog/xml'
+require 'fog/akamai/version'
 
 module Fog
+  module Storage
+    autoload :Akamai, 'fog/akamai/storage'
+  end
+
   module Akamai
-    # Your code goes here...
+    extend Fog::Provider
+
+    service(:storage, 'Storage')
   end
 end
