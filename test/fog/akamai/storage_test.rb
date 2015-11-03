@@ -15,7 +15,7 @@ class Fog::Akamai::StorageTest < Minitest::Test
   end
 
   def test_format_path_will_prefix_with_the_cp_code
-    assert_equal '/42/path', @storage.format_path('path')
+    assert_equal '/42/path', @storage.format_path('/path')
   end
 
   def test_format_path_work_for_empty_values
@@ -39,6 +39,6 @@ class Fog::Akamai::StorageTest < Minitest::Test
   end
 
   def test_acs_auth_sign_will_return_the_base64_hmac_sha256
-    assert_equal 'IW0ciCVRKh5w1hqtGJOXapfG1ddBTtcFd3ww+1nuG3E=', @storage.acs_auth_sign('data', 'path', :dir)
+    assert_equal 'LTT8dXlpY97KBnWVA9iu4iNlRv2okKP0P+qlUNLKVzw=', @storage.acs_auth_sign('data', '/42/path', :dir)
   end
 end

@@ -9,6 +9,8 @@ module Fog
       ACS_AUTH_ACTION_HEADER = 'X-Akamai-ACS-Action'
 
       model_path 'fog/akamai/models/storage'
+      collection :directories
+      model :directory
       collection :files
       model :file
 
@@ -17,7 +19,7 @@ module Fog
 
       module Helpers
         def format_path(path)
-          ["/#{akamai_cp_code}", path].reject(&:empty?).join('/')
+          ["/#{akamai_cp_code}", path].reject(&:empty?).join
         end
       end
       class Mock
@@ -27,11 +29,11 @@ module Fog
         include Helpers
 
         attr_reader :akamai_key, :akamai_host, :akamai_cp_code, :akamai_key_name, :scheme, :port
-        # Initialize connection to Akamai Storage
+        # Initialize connection to Akamai
         #
         # ==== Notes
-        # options parameter must include values for :akamai_host, :akamai_key_name and
-        # :akamai_key in order to create a connection
+        # options parameter must include values for :akamai_host, :akamai_key_name,
+        # :akamai_key and :akamai_cp_code in order to create a connection
         #
         # ==== Examples
         #   akamai_storage = Storage.new(
