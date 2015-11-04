@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Fog::Akamai::VERSION
   spec.authors       = ['Calin']
   spec.email         = ['calinoiu.alexandru@agilefreaks.com']
+  spec.license       = 'MIT'
 
   spec.summary       = %q{Module for 'fog' gem to support Akamai}
   spec.description   = %q{This library can be used as a module for `fog` or as standalone provider
@@ -21,10 +22,10 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'minitest'
-  spec.add_development_dependency 'minitest-reporters'
-  spec.add_development_dependency 'test-unit'
-  spec.add_development_dependency 'webmock'
+  spec.add_development_dependency 'minitest', '~> 5.8'
+  spec.add_development_dependency 'minitest-reporters', '~> 1.1'
+  spec.add_development_dependency 'test-unit', '~> 3.1'
+  spec.add_development_dependency 'webmock', '~> 1.22'
 
   spec.add_dependency 'fog-core',  '~> 1.27'
   spec.add_dependency 'fog-json',  '~> 1.0'
