@@ -3,7 +3,7 @@ module Fog
     class Akamai < Fog::Service
       requires :akamai_host, :akamai_key_name, :akamai_key, :akamai_cp_code
 
-      VALID_ACTIONS = [:dir, :download, :stat]
+      VALID_ACTIONS = [:dir, :download, :stat, :upload]
       ACS_AUTH_DATA_HEADER = 'X-Akamai-ACS-Auth-Data'
       ACS_AUTH_SIGN_HEADER = 'X-Akamai-ACS-Auth-Sign'
       ACS_AUTH_ACTION_HEADER = 'X-Akamai-ACS-Action'
@@ -18,12 +18,14 @@ module Fog
       request :dir
       request :download
       request :stat
+      request :upload
 
       module Helpers
         def format_path(path)
           ["/#{akamai_cp_code}", path].reject(&:empty?).join
         end
       end
+
       class Mock
       end
 
@@ -94,7 +96,7 @@ module Fog
               ACS_AUTH_DATA_HEADER => auth_data,
               ACS_AUTH_SIGN_HEADER => auth_sign,
               ACS_AUTH_ACTION_HEADER => acs_action(action)
-            }
+            }.merge(params[:headers])
 
             params = params.merge(headers: headers)
             Fog::XML::Connection.new(url).request(params)

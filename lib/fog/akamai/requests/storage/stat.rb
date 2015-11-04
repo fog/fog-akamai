@@ -6,12 +6,13 @@ module Fog
 
         def stat(path)
           raise ArgumentError.new('path needs to have a value') if path.empty?
-          request(:stat, {
-                         :path => format_path(path),
-                         :method => 'GET',
-                         :expects => 200,
-                         :parser => Fog::Parsers::Storage::Akamai::Dir.new
-                       })
+          request(:stat,
+                  {
+                    :path => format_path(path),
+                    :method => 'GET',
+                    :expects => 200,
+                    :parser => Fog::Parsers::Storage::Akamai::Dir.new
+                  })
         end
       end
 
