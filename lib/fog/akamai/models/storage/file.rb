@@ -14,7 +14,6 @@ module Fog
 
          def get(key)
            requires :directory
-
          end
 
          def save

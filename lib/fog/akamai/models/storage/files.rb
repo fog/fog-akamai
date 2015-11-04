@@ -11,6 +11,10 @@ module Fog
         end
 
         def get(path)
+          if directory
+            path = [directory.key, path].join('/')
+          end
+
           body = service.download(path).data[:body]
           new(:body => body)
         end

@@ -5,7 +5,7 @@ class Fog::Storage::Akamai::DirectoriesTest < Minitest::Test
   include DirRequestStub
 
   def setup
-    stub_for_path('/42/path')
+    stub_dir('/42/path')
   end
 
   def test_get_will_return_a_directory_with_the_correct_key

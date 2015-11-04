@@ -5,12 +5,12 @@ class Fog::Storage::Akamai::DownloadTest < Minitest::Test
   include DownloadRequestStub
 
   def test_download_calls_akamai_with_the_correct_host_and_path
-    stub_for_path('/42/test2.jpg')
+    stub_download('/42/test2.jpg')
     assert_equal 200, Fog::Storage[:akamai].download('/test2.jpg').status
   end
 
   def test_download_will_raise_exception_if_status_is_not_ok
-    stub_for_path('/42/test2.jpg', 404)
+    stub_download('/42/test2.jpg', 404)
     assert_raises { Fog::Storage[:akamai].download('/test2.jpg') }
   end
 end
