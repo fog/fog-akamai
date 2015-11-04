@@ -2,7 +2,7 @@
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fog/storage`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+This is still under development only very basic net storage functionality has been put in place.
 
 ## Installation
 
@@ -22,7 +22,52 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Before you can use fog-akamai, you must require it in your application:
+
+```ruby
+require 'fog/aws'
+```
+
+Since it's a bad practice to have your credentials in source code, you should load them from default fog configuration file: ```~/.fog```. This file could look like this:
+
+```
+default:
+  akamai_host:     <YOUR_AKAMAIHOST>
+  akamai_key_name: <YOUR_KEY_NAME>
+  akamai_key:      <YOU_KEY>
+  akamai_cp_code:  <YOU_CP_CODE>
+```
+
+You can get more detail about how to obtain this credential form [this doc](https://control.akamai.com/dl/customers/NS/NS_Config_FS.pdf)
+
+### Connecting to NetStorage service
+
+```ruby
+net_storage = Fog::Compute.new :provider => 'akamai'
+```
+
+### To get a directory:
+
+```ruby
+directory = net_storage.directories.get('/path')
+```
+
+### To check if a file exists:
+
+```ruby
+directory.files.stat('file.ext')
+```
+
+### To upload a file:
+
+```ruby
+directory.files.create(directory: directory, body: file_body, key: file_name)
+```
+
+## Roadmap
+
+- finish implementing the netstorage api
+- implement ccu api
 
 ## Development
 
