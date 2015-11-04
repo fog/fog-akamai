@@ -4,7 +4,7 @@ module Fog
       module Akamai
         class Dir < Fog::Parsers::Base
           def reset
-            @response = { :diretory => '', :files => [] }
+            @response = { :directory => '', :files => [] }
           end
 
           def start_element(name, attrs = [])

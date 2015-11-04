@@ -13,6 +13,9 @@ module Fog
       end
 
       class Mock
+        def download(path)
+          raise Fog::Mock.not_implemented
+        end
       end
     end
   end
