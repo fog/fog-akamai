@@ -3,12 +3,18 @@ module Fog
      class Akamai
        class File < Fog::Model
 
-         identity :name, :aliases => 'name'
+         identity :key, :aliases => 'name'
 
-         attribute :type, :aliases => 'type'
-         attribute :mtime, :aliases => 'mtime'
-         attribute :md5, :aliases => 'md5'
-         attribute :size, :aliases => 'size'
+         attribute :directory
+         attribute :name
+         attribute :mtime
+         attribute :md5
+         attribute :size
+
+         def get(key)
+           requires :directory
+
+         end
 
          def save
            # requires all attributes and saves

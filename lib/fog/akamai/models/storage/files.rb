@@ -4,8 +4,10 @@ module Fog
       class Files < Fog::Collection
         model Fog::Storage::Akamai::File
 
+        attribute :directory
+
         def all
-          load(data)
+          requires :directory
         end
 
         def get(identity)
