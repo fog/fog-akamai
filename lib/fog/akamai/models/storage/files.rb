@@ -10,8 +10,9 @@ module Fog
           requires :directory
         end
 
-        def get(identity)
-          raise ArgumentError(identity)
+        def get(path)
+          body = service.download(path).data[:body]
+          new(:body => body)
         end
       end
     end

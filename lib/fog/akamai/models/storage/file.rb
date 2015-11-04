@@ -10,6 +10,7 @@ module Fog
          attribute :mtime
          attribute :md5
          attribute :size
+         attribute :body
 
          def get(key)
            requires :directory

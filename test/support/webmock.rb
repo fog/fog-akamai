@@ -1,1 +1,1 @@
-# require 'webmock/minitest'
+require 'webmock/minitest'
