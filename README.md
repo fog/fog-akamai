@@ -67,6 +67,7 @@ directory.files.create(directory: directory, body: file_body, key: file_name)
 ## Roadmap
 
 - finish implementing the netstorage api
+- add mock support
 - implement ccu api
 
 ## Development
