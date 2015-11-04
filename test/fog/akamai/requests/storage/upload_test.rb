@@ -9,7 +9,8 @@ class Fog::Storage::Akamai::UploadTest < Minitest::Test
   end
 
   def test_upload
-    stub_upload('/42/path/test2.jpg')
+    stub_upload = stub_upload('/42/path/test2.jpg')
     Fog::Storage[:akamai].upload('/path/test2.jpg', @body)
+    assert_requested stub_upload
   end
 end

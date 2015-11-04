@@ -96,7 +96,7 @@ module Fog
               ACS_AUTH_DATA_HEADER => auth_data,
               ACS_AUTH_SIGN_HEADER => auth_sign,
               ACS_AUTH_ACTION_HEADER => acs_action(action)
-            }.merge(params[:headers])
+            }.merge(params[:headers] || {})
 
             params = params.merge(headers: headers)
             Fog::XML::Connection.new(url).request(params)

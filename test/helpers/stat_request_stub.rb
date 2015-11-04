@@ -14,6 +14,6 @@ module StatRequestStub
 
   def stub_stat(path, status = 200)
     body = path.match(/\....$/) ? stat_body_file : stat_body_dir
-    stub_reques t(:get, "https://example-nsu.akamai.net#{path}").to_return(body: body, status: status)
+    stub_request(:get, "https://example-nsu.akamai.net#{path}").to_return(body: body, status: status)
   end
 end

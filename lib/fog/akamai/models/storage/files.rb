@@ -2,6 +2,8 @@ module Fog
   module Storage
     class Akamai
       class Files < Fog::Collection
+        include Fog::Akamai::Shared
+
         model Fog::Storage::Akamai::File
 
         attribute :directory
@@ -11,24 +13,15 @@ module Fog
         end
 
         def get(path)
-          body = service.download(full_path(path)).data[:body]
+          body = service.download(full_path(path, directory)).data[:body]
           new(:body => body)
         end
 
         def stat(path)
-          new(service.stat(full_path(path)).data[:body][:files].first)
+          new(service.stat(full_path(path, directory)).data[:body][:files].first)
         rescue Excon::Errors::NotFound
           nil
         end
-
-        private
-
-          def full_path(path)
-            if directory
-              path = [directory.key, path].join('/')
-            end
-            path
-          end
       end
     end
   end

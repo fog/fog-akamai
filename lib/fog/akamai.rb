@@ -11,5 +11,14 @@ module Fog
     extend Fog::Provider
 
     service(:storage, 'Storage')
+
+    module Shared
+      def full_path(path, directory = nil)
+        if directory
+          path = [directory.key, path].join('/')
+        end
+        path
+      end
+    end
   end
 end

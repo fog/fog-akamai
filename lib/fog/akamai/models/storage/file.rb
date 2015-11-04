@@ -2,6 +2,7 @@ module Fog
    module Storage
      class Akamai
        class File < Fog::Model
+         include Fog::Akamai::Shared
 
          identity :key, :aliases => 'name'
 
@@ -17,12 +18,12 @@ module Fog
          end
 
          def save
-           # requires all attributes and saves
+           requires :body, :directory, :key
+           service.upload(full_path(key, directory), body)
          end
 
          def destroy
-           requires :name
-           # should destroy
+           requires :directory, :key
          end
 
          def ready?
