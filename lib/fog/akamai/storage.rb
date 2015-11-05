@@ -27,6 +27,8 @@ module Fog
       end
 
       class Mock
+        def initialize(_options = {})
+        end
       end
 
       class Real
