@@ -78,7 +78,7 @@ module Fog
         end
 
         def acs_action(action)
-          fail ArgumentError.new("Invalid action #{action} valid actions are: #{VALID_ACTIONS}") unless VALID_ACTIONS.include?(action)
+          fail(ArgumentError, "Invalid action #{action} valid actions are: #{VALID_ACTIONS}") unless VALID_ACTIONS.include?(action)
 
           "version=1&action=#{action}&format=xml"
         end
@@ -96,11 +96,10 @@ module Fog
 
           path = params[:path]
           auth_data = acs_auth_data
-          auth_sign = acs_auth_sign(auth_data, path, action)
 
           headers = {
             ACS_AUTH_DATA_HEADER => auth_data,
-            ACS_AUTH_SIGN_HEADER => auth_sign,
+            ACS_AUTH_SIGN_HEADER => acs_auth_sign(auth_data, path, action),
             ACS_AUTH_ACTION_HEADER => acs_action(action)
           }.merge(params[:headers] || {})
 

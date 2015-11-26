@@ -5,7 +5,7 @@ module Fog
         require 'fog/akamai/parsers/storage/dir'
 
         def stat(path)
-          fail ArgumentError.new('path needs to have a value') if path.empty?
+          fail(ArgumentError, 'path needs to have a value') if path.empty?
           request(:stat,
                   path: format_path(path),
                   method: 'GET',

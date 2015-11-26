@@ -12,18 +12,18 @@ module Fog
             when 'stat'
               @response[:directory] = attrs.first.value
             when 'file'
-              @response[:files] << attrs_to_hash(attrs) if is_file?(attrs)
+              @response[:files] << attrs_to_hash(attrs) if file?(attrs)
             end
           end
 
           private
 
-          def is_file?(attrs)
+          def file?(attrs)
             attrs.any? { |attr| attr.localname == 'type' && attr.value == 'file' }
           end
 
           def attrs_to_hash(attrs)
-            attrs.inject({}) { |result, attr| result.merge(attr.localname => attr.value) }
+            attrs.inject({}) { |a, e| a.merge(e.localname => e.value) }
           end
         end
       end
