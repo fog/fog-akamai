@@ -7,8 +7,8 @@ module Fog
         def get(key)
           data = service.dir(key).body
 
-          directory = new(:key => data[:directory].sub("/#{service.akamai_cp_code}", ''))
-          directory.files.load(data[:files].map { |file| file.merge(:directory => directory) })
+          directory = new(key: data[:directory].sub("/#{service.akamai_cp_code}", ''))
+          directory.files.load(data[:files].map { |file| file.merge(directory: directory) })
 
           directory
         end

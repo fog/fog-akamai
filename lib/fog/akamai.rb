@@ -14,9 +14,7 @@ module Fog
 
     module Shared
       def full_path(path, directory = nil)
-        if directory
-          path = [directory.key, path].join('/')
-        end
+        path = [directory.key, path].join('/') if directory
         path
       end
     end

@@ -23,7 +23,7 @@ class Fog::Akamai::StorageTest < Minitest::Test
   end
 
   def test_acs_auth_data_has_the_correct_format
-    Time.stub :now, Time.at(1446562868) do
+    Time.stub :now, Time.at(1_446_562_868) do
       SecureRandom.stub :uuid, 'random-unique-uid-hopefully' do
         assert_equal '5, 0.0.0.0, 0.0.0.0, 1446562868, random-unique-uid-hopefully, key_name', @storage.acs_auth_data
       end

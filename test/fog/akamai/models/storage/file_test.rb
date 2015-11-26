@@ -13,10 +13,10 @@ class Fog::Storage::Akamai::FileTest < Minitest::Test
     body = File.open(File.expand_path('../../../../.../../../assets/test2.jpg', __FILE__))
     directory = Fog::Storage[:akamai].directories.get('/path')
     directory.files.create(
-        :key => 'test2.jpg',
-        :directory => directory,
-        :body => body
-      )
+      key: 'test2.jpg',
+      directory: directory,
+      body: body
+    )
 
     assert_requested stub_upload
   end

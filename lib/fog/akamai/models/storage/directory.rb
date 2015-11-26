@@ -8,8 +8,8 @@ module Fog
 
         def files
           @files ||= Fog::Storage::Akamai::Files.new(
-            :directory => self,
-            :service => service
+            directory: self,
+            service: service
           )
         end
       end

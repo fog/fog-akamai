@@ -7,18 +7,16 @@ module Fog
         def dir(path = nil)
           path ||= ''
           request(:dir,
-                  {
-                    :path => format_path(path),
-                    :method => 'GET',
-                    :expects => 200,
-                    :parser => Fog::Parsers::Storage::Akamai::Dir.new
-                  })
+                  path: format_path(path),
+                  method: 'GET',
+                  expects: 200,
+                  parser: Fog::Parsers::Storage::Akamai::Dir.new)
         end
       end
 
       class Mock
         def dir
-          raise Fog::Mock.not_implemented
+          fail Fog::Mock.not_implemented
         end
       end
     end

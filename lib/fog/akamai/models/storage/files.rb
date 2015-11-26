@@ -14,7 +14,7 @@ module Fog
 
         def get(path)
           body = service.download(full_path(path, directory)).data[:body]
-          new(:body => body)
+          new(body: body)
         end
 
         def stat(path)

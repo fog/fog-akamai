@@ -27,6 +27,10 @@ module Fog
       end
 
       class Mock
+        def self.data
+          @data = {}
+        end
+
         def initialize(_options = {})
         end
       end
@@ -74,7 +78,7 @@ module Fog
         end
 
         def acs_action(action)
-          raise ArgumentError.new("Invalid action #{action} valid actions are: #{VALID_ACTIONS}") unless VALID_ACTIONS.include?(action)
+          fail ArgumentError.new("Invalid action #{action} valid actions are: #{VALID_ACTIONS}") unless VALID_ACTIONS.include?(action)
 
           "version=1&action=#{action}&format=xml"
         end
@@ -82,32 +86,32 @@ module Fog
         def acs_auth_sign(auth_data, path, action)
           data = auth_data + sign_string(path, action)
           digest = OpenSSL::Digest::Digest::SHA256.new
-          Base64.encode64(OpenSSL::HMAC.digest(digest, akamai_key, data)).strip()
+          Base64.encode64(OpenSSL::HMAC.digest(digest, akamai_key, data)).strip
         end
 
         private
 
-          def request(action, params)
-            url = "#{scheme}://#{akamai_host}:#{port}"
+        def request(action, params)
+          url = "#{scheme}://#{akamai_host}:#{port}"
 
-            path = params[:path]
-            auth_data = acs_auth_data
-            auth_sign = acs_auth_sign(auth_data, path, action)
+          path = params[:path]
+          auth_data = acs_auth_data
+          auth_sign = acs_auth_sign(auth_data, path, action)
 
-            headers = {
-              ACS_AUTH_DATA_HEADER => auth_data,
-              ACS_AUTH_SIGN_HEADER => auth_sign,
-              ACS_AUTH_ACTION_HEADER => acs_action(action)
-            }.merge(params[:headers] || {})
+          headers = {
+            ACS_AUTH_DATA_HEADER => auth_data,
+            ACS_AUTH_SIGN_HEADER => auth_sign,
+            ACS_AUTH_ACTION_HEADER => acs_action(action)
+          }.merge(params[:headers] || {})
 
-            params = params.merge(headers: headers)
-            Fog::XML::Connection.new(url).request(params)
-          end
+          params = params.merge(headers: headers)
+          Fog::XML::Connection.new(url).request(params)
+        end
 
-          def sign_string(path, action)
-            action = "x-akamai-acs-action:#{acs_action(action)}\n"
-            "#{path}\n#{action}"
-          end
+        def sign_string(path, action)
+          action = "x-akamai-acs-action:#{acs_action(action)}\n"
+          "#{path}\n#{action}"
+        end
       end
     end
   end

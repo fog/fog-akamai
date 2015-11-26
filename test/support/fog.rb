@@ -1,4 +1,4 @@
-Excon.defaults.merge!(:debug_request => true, :debug_response => true)
+Excon.defaults.merge!(debug_request: true, debug_response: true)
 
 Fog.credentials = {
   akamai_host: 'example-nsu.akamai.net',
