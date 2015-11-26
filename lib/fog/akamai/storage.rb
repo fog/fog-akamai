@@ -3,7 +3,7 @@ module Fog
     class Akamai < Fog::Service
       requires :akamai_host, :akamai_key_name, :akamai_key, :akamai_cp_code
 
-      VALID_ACTIONS = [:dir, :download, :stat, :upload]
+      VALID_ACTIONS = [:dir, :mkdir, :download, :stat, :upload]
       ACS_AUTH_DATA_HEADER = 'X-Akamai-ACS-Auth-Data'
       ACS_AUTH_SIGN_HEADER = 'X-Akamai-ACS-Auth-Sign'
       ACS_AUTH_ACTION_HEADER = 'X-Akamai-ACS-Action'
@@ -16,6 +16,7 @@ module Fog
 
       request_path 'fog/akamai/requests/storage'
       request :dir
+      request :mk_dir
       request :download
       request :stat
       request :upload
@@ -26,19 +27,49 @@ module Fog
         end
       end
 
-      class Mock
-        def self.data
-          @data = {}
+      module Initializer
+        def self.included(klass)
+          klass.instance_eval do
+            attr_reader :akamai_key, :akamai_host, :akamai_cp_code, :akamai_key_name, :scheme, :port
+          end
         end
 
-        def initialize(_options = {})
+        def init(options)
+          @akamai_host = options[:akamai_host]
+          @akamai_key_name = options[:akamai_key_name]
+          @akamai_key = options[:akamai_key]
+          @akamai_cp_code = options[:akamai_cp_code]
+
+          @scheme = options[:scheme] || 'https'
+          @port = options[:port] || 443
+        end
+      end
+
+      class Mock
+        include Helpers
+        include Initializer
+
+        def self.data
+          @data ||= {}
+        end
+
+        def initialize(options = {})
+          init(options)
+        end
+
+        def data
+          self.class.data
+        end
+
+        def reset_data
+          self.class.data.clear
         end
       end
 
       class Real
         include Helpers
+        include Initializer
 
-        attr_reader :akamai_key, :akamai_host, :akamai_cp_code, :akamai_key_name, :scheme, :port
         # Initialize connection to Akamai
         #
         # ==== Notes
@@ -59,13 +90,7 @@ module Fog
         # ==== Returns
         # * Storage object for akamai.
         def initialize(options = {})
-          @akamai_host = options[:akamai_host]
-          @akamai_key_name = options[:akamai_key_name]
-          @akamai_key = options[:akamai_key]
-          @akamai_cp_code = options[:akamai_cp_code]
-
-          @scheme = options[:scheme] || 'https'
-          @port = options[:port] || 443
+          init(options)
         end
 
         def acs_auth_data

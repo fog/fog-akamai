@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'test-unit', '~> 3.1'
   spec.add_development_dependency 'webmock', '~> 1.22'
   spec.add_development_dependency 'rubocop', '~> 0.35'
+  spec.add_development_dependency 'timecop', '~> 0.8.0'
 
   spec.add_dependency 'fog-core',  '~> 1.27'
   spec.add_dependency 'fog-json',  '~> 1.0'
