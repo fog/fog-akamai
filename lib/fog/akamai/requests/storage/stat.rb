@@ -7,7 +7,7 @@ module Fog
         require 'fog/akamai/parsers/storage/dir'
 
         def stat(path)
-          fail(ArgumentError, 'path needs to have a value') if path.empty?
+          path_guard(path)
           request(:stat,
                   path: format_path(path),
                   method: 'GET',
@@ -18,15 +18,14 @@ module Fog
 
       class Mock
         def stat(path)
-          fail(ArgumentError, 'path needs to have a value') if path.empty?
+          path_guard(path)
 
           path = Pathname.new(format_path(path))
           key = path.split.first.to_s
 
-          response = Excon::Response.new
-          response.status = get_status(key, path.basename.to_s)
-          response.body = get_body(key)
+          response = Excon::Response.new(status: get_status(key, path.basename.to_s), body: get_body(key))
 
+          fail(Excon::Errors::NotFound, '404 Not Found') if response.status == 404
           response
         end
 

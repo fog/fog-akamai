@@ -25,6 +25,15 @@ module Fog
         def format_path(path)
           ["/#{akamai_cp_code}", path].reject(&:empty?).join
         end
+
+        def path_and_body_guard(path, body)
+          path_guard(path)
+          fail ArgumentError('body is required') if body.nil?
+        end
+
+        def path_guard(path)
+          fail(ArgumentError, 'path needs to have a value') if path.nil? || path.empty?
+        end
       end
 
       module Initializer

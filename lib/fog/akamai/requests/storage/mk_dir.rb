@@ -5,7 +5,7 @@ module Fog
     class Akamai
       class Real
         def mk_dir(path)
-          fail(ArgumentError, "path is require, can't make a dir with no path") if path.nil? || path.empty?
+          path_guard(path)
           request(:mkdir,
                   path: format_path(path),
                   method: 'PUT',
@@ -16,7 +16,7 @@ module Fog
 
       class Mock
         def mk_dir(path)
-          fail(ArgumentError, "path is require, can't make a dir with no path") if path.nil? || path.empty?
+          path_guard(path)
 
           path = Pathname.new(format_path(path))
           last_path_basename = ''

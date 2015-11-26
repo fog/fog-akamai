@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'helpers/upload_request_stub'
+require 'timecop'
 require 'fog/akamai/requests/storage_test_base'
 
 module Fog
@@ -35,7 +36,12 @@ module Fog
       end
 
       def test_mock
-        storage.upload('/path/test2.jpg', body)
+        Timecop.freeze(Time.at(42)) do
+          storage.upload('/path/rocket man.jpg', body)
+        end
+        file = { 'type' => 'file', 'name' => 'rocket man.jpg', 'mtime' => '42', 'size' => body.size.to_s }
+        directory = { directory: '/42/path', files: [file], directories: [] }
+        assert_equal(directory, storage.data['/42/path'])
       end
     end
   end

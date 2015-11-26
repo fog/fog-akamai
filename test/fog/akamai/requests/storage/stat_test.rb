@@ -44,11 +44,11 @@ module Fog
         directory = { directory: '/42', files: [], directories: [] }
         storage.data['/42'] = directory
 
-        assert_equal(404, storage.stat('/test').status)
+        assert_raises(Excon::Errors::NotFound) { storage.stat('/test') }
       end
 
       def test_for_non_existing_parent_directory
-        assert_equal(404, storage.stat('/test').status)
+        assert_raises(Excon::Errors::NotFound) { storage.stat('/test') }
       end
 
       def test_for_an_existing_file
