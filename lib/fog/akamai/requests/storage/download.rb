@@ -19,8 +19,9 @@ module Fog
       class Mock
         def download(path)
           path_guard(path)
-          fail(Excon::Errors::NotFound, '404 Not Found') unless data.key?(path) && data[path].key?(:body)
-          Excon::Response.new(status: 200, body: data[path][:body])
+          formatted_path = format_path(path)
+          fail(Excon::Errors::NotFound, '404 Not Found') unless data.key?(formatted_path) && data[formatted_path].key?(:body)
+          Excon::Response.new(status: 200, body: data[formatted_path][:body])
         end
       end
     end

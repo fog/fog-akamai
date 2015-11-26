@@ -31,7 +31,7 @@ module Fog
       class Mock
         def dir(path = '')
           key = format_path(path)
-          data.key?(key) ? Response.new(status: 200, body: data[key]) : fail(Excon::Errors::NotFound, '404 Not Found')
+          data.key?(key) ? Excon::Response.new(status: 200, body: data[key]) : fail(Excon::Errors::NotFound, '404 Not Found')
         end
       end
     end

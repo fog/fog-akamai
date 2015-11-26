@@ -39,7 +39,7 @@ module Fog
 
         def add_file(dir, path, body)
           data[format_path(dir)][:files] << build_file(body, path)
-          data[path.to_s] = { body: body }
+          data[format_path(path.to_s)] = { body: body }
         end
 
         def build_file(body, path)
