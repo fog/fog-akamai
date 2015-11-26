@@ -13,5 +13,16 @@ module Fog
         assert_requested stub_dir
       end
     end
+
+    class MockDirTest < MockStorageTestBase
+      def test_when_a_dir_exists_will_return_the_dir
+        storage.mk_dir('/test')
+        assert_equal({ :directory => '/42/test', :files => [], :directories => [] }, storage.dir('/test').body)
+      end
+
+      def test_when_dir_does_not_exist_will_raise_exception
+        assert_raises(Excon::Errors::NotFound) { storage.dir('/test') }
+      end
+    end
   end
 end

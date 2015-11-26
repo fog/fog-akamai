@@ -22,18 +22,8 @@ module Fog
       end
     end
 
-    class MockUploadTest < StorageTestBase
+    class MockUploadTest < MockStorageTestBase
       include UploadTestHelper
-
-      def setup
-        Fog.mock!
-        super
-        storage.reset_data
-      end
-
-      def teardown
-        Fog.unmock!
-      end
 
       def test_mock
         Timecop.freeze(Time.at(42)) do

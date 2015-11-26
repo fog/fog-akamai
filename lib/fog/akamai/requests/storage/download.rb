@@ -2,6 +2,11 @@ module Fog
   module Storage
     class Akamai
       class Real
+        # Use this action to download a file
+        # @param path [String] the path for the file that will be downloaded
+        # @return [Excon::Response] response:
+        #   * body [binary]
+
         def download(path)
           path_guard(path)
           request(:download,

@@ -4,6 +4,10 @@ module Fog
   module Storage
     class Akamai
       class Real
+        # Use this action to create a dir
+        # @param path [String] the path to create, it will create directories recursively
+        # @return [Excon::Response] response
+
         def mk_dir(path)
           path_guard(path)
           request(:mkdir,

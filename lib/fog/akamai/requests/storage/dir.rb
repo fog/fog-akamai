@@ -19,8 +19,7 @@ module Fog
         #       * name [String]
         #       * mtime [String]
 
-        def dir(path = nil)
-          path ||= ''
+        def dir(path = '')
           request(:dir,
                   path: format_path(path),
                   method: 'GET',
@@ -30,14 +29,9 @@ module Fog
       end
 
       class Mock
-        def dir(_path = nil)
-          response = Excon::Response.new
-          response.headers['Status'] = 200
-
-          response.body = {
-          }
-
-          response
+        def dir(path = '')
+          key = format_path(path)
+          data.key?(key) ? Response.new(status: 200, body: data[key]) : fail(Excon::Errors::NotFound, '404 Not Found')
         end
       end
     end

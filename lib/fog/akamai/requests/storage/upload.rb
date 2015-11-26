@@ -4,6 +4,11 @@ module Fog
   module Storage
     class Akamai
       class Real
+        # Use this action to upload a file
+        # @param path [String] the path to where to upload
+        # @param body [File] the file to upload, can be file or a byte array
+        # @return [Excon::Response] response
+
         def upload(path, body)
           path_and_body_guard(path, body)
 

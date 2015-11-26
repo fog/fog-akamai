@@ -23,17 +23,7 @@ module Fog
       end
     end
 
-    class MockStatTest < StorageTestBase
-      def setup
-        Fog.mock!
-        super
-        storage.reset_data
-      end
-
-      def teardown
-        Fog.unmock!
-      end
-
+    class MockStatTest < MockStorageTestBase
       def test_for_an_existing_directory
         directory = { directory: '/42', files: [], directories: [{ 'type' => 'dir', 'name' => 'test', 'mtime' => '42' }] }
         storage.data['/42'] = directory

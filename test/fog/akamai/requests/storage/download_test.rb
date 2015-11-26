@@ -19,18 +19,12 @@ module Fog
       end
     end
 
-    class MockDownloadTest < StorageTestBase
+    class MockDownloadTest < MockStorageTestBase
       attr_reader :body
 
       def setup
-        Fog.mock!
         super
-        storage.reset_data
         @body ||= File.open(File.expand_path('../../../../.../../../assets/test2.jpg', __FILE__))
-      end
-
-      def teardown
-        Fog.unmock!
       end
 
       def test_with_a_uploaded_file

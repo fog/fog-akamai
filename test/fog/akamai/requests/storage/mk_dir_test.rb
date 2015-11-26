@@ -20,19 +20,7 @@ module Fog
       end
     end
 
-    class MockMkDirTest < StorageTestBase
-      attr_reader :storage
-
-      def setup
-        Fog.mock!
-        super
-        storage.reset_data
-      end
-
-      def teardown
-        Fog.unmock!
-      end
-
+    class MockMkDirTest < MockStorageTestBase
       def test_mock_without_path_will_fail
         assert_raises(ArgumentError) { storage.mk_dir(nil) }
         assert_raises(ArgumentError) { storage.mk_dir('') }
