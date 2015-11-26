@@ -16,8 +16,9 @@ module Fog
       end
 
       class Mock
-        def upload(_path, _body)
-          fail Fog::Mock.not_implementedend
+        def upload(path, body)
+          fail ArgumentError('path is required') if path.empty?
+          fail ArgumentError('body is required') if body.nil?
         end
       end
     end

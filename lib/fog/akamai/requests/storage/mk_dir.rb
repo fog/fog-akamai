@@ -28,6 +28,8 @@ module Fog
             update_data(key, last_path_basename)
             last_path_basename = parent.basename.to_s
           end
+
+          Excon::Response.new(headers: { 'Status' => 200 })
         end
 
         private

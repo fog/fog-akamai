@@ -1,40 +1,41 @@
 require 'test_helper'
 require 'helpers/mk_dir_request_stub'
 require 'timecop'
+require 'fog/akamai/requests/storage_test_base'
 
 module Fog
   module Storage
-    class MkDirTest < Minitest::Test
+    class MkDirTest < StorageTestBase
       include MkDirRequestStub
 
       def test_mk_dir_without_path_will_fail
-        assert_raises(ArgumentError) { Fog::Storage[:akamai].mk_dir(nil) }
-        assert_raises(ArgumentError) { Fog::Storage[:akamai].mk_dir('') }
+        assert_raises(ArgumentError) { storage.mk_dir(nil) }
+        assert_raises(ArgumentError) { storage.mk_dir('') }
       end
 
       def test_mk_dir_calls_correct_host_and_path
         stub_mk_dir = stub_mk_dir('/42/test')
-        Fog::Storage[:akamai].mk_dir('/test')
+        storage.mk_dir('/test')
         assert_requested stub_mk_dir
-      end
-
-      def test_for_real
-        Fog::Storage[:akamai].mk_dir('/webroot/webassets/test')
       end
     end
 
-    class MockMkDirTest < Minitest::Test
+    class MockMkDirTest < StorageTestBase
       attr_reader :storage
 
       def setup
         Fog.mock!
-        @storage = Fog::Storage[:akamai]
+        super
         storage.reset_data
       end
 
+      def teardown
+        Fog.unmock!
+      end
+
       def test_mock_without_path_will_fail
-        assert_raises(ArgumentError) { Fog::Storage[:akamai].mk_dir(nil) }
-        assert_raises(ArgumentError) { Fog::Storage[:akamai].mk_dir('') }
+        assert_raises(ArgumentError) { storage.mk_dir(nil) }
+        assert_raises(ArgumentError) { storage.mk_dir('') }
       end
 
       def test_mock_with_path_will_create_dir
