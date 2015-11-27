@@ -1,6 +1,6 @@
 require 'test_helper'
 require 'helpers/download_request_stub'
-require 'fog/akamai/requests/storage_test_base'
+require 'fog/akamai/storage_test_base'
 
 module Fog
   module Storage

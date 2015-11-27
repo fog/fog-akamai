@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'helpers/mk_dir_request_stub'
 require 'timecop'
-require 'fog/akamai/requests/storage_test_base'
+require 'fog/akamai/storage_test_base'
 
 module Fog
   module Storage
