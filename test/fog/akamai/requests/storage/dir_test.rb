@@ -16,7 +16,7 @@ module Fog
 
     class MockDirTest < MockStorageTestBase
       def test_when_a_dir_exists_will_return_the_dir
-        storage.mk_dir('/test')
+        storage.mkdir('/test')
         assert_equal({ directory: '/42/test', files: [], directories: [] }, storage.dir('/test').body)
       end
 

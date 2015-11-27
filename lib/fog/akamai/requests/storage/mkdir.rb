@@ -8,7 +8,7 @@ module Fog
         # @param path [String] the path to create, it will create directories recursively
         # @return [Excon::Response] response
 
-        def mk_dir(path)
+        def mkdir(path)
           path_guard(path)
           request(:mkdir,
                   path: format_path(path),
@@ -19,7 +19,7 @@ module Fog
       end
 
       class Mock
-        def mk_dir(path)
+        def mkdir(path)
           path_guard(path)
 
           path = Pathname.new(format_path(path))

@@ -29,7 +29,7 @@ module Fog
           path = Pathname(path)
           dir = path.split.first.to_s
 
-          mk_dir(dir)
+          mkdir(dir)
           add_file(dir, path, body)
 
           Excon::Response.new(status: 200)

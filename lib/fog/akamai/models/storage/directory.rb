@@ -12,6 +12,11 @@ module Fog
             service: service
           )
         end
+
+        def destroy
+          requires :key
+          service.rmdir(key)
+        end
       end
     end
   end

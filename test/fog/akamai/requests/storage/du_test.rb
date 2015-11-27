@@ -27,8 +27,8 @@ module Fog
         super
 
         storage.upload('/music/morning sun.wav', "Otis Redding Sittin' On")
-        storage.mk_dir('/music/caravan')
-        storage.mk_dir('/music/moondance')
+        storage.mkdir('/music/caravan')
+        storage.mkdir('/music/moondance')
       end
 
       def test_with_a_existing_dir_will_compute_a_body
