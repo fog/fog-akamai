@@ -1,6 +1,5 @@
 require 'test_helper'
 require 'helpers/mtime_request_stub'
-require 'timecop'
 require 'fog/akamai/storage_test_base'
 
 module Fog
