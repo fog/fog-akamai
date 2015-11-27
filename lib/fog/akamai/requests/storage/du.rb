@@ -13,8 +13,7 @@ module Fog
         #     * files [String] - The size of the files in bytes
         #     * bytes [String] - The size of the directory in bytes
 
-
-      def du(path)
+        def du(path)
           path_guard(path)
           request(:du,
                   path: format_path(path),
@@ -27,6 +26,15 @@ module Fog
       class Mock
         def du(path)
           path_guard(path)
+
+          key = format_path(path)
+          directory = data[key]
+
+          if directory
+            Excon::Response.new(status: 200, body: { directory: key, files: directory[:files].count.to_s, bytes: directory[:directories].count.to_s })
+          else
+            fail(Excon::Errors::NotFound, '404 Not Found')
+          end
         end
       end
     end

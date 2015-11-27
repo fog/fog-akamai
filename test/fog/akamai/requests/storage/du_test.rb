@@ -21,5 +21,27 @@ module Fog
         assert_equal('43', body[:bytes])
       end
     end
+
+    class MockDuTest < MockStorageTestBase
+      def setup
+        super
+
+        storage.upload('/music/morning sun.wav', "Otis Redding Sittin' On")
+        storage.mk_dir('/music/caravan')
+        storage.mk_dir('/music/moondance')
+      end
+
+      def test_with_a_existing_dir_will_compute_a_body
+        body = storage.du('/music').body
+
+        assert_equal('/42/music', body[:directory])
+        assert_equal('2', body[:bytes])
+        assert_equal('1', body[:files])
+      end
+
+      def test_du_with_a_missing_dir_will_return_not_found
+        assert_raises(Excon::Errors::NotFound) { storage.du('/bad_music') }
+      end
+    end
   end
 end
