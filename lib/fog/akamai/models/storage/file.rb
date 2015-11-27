@@ -34,6 +34,13 @@ module Fog
           requires :directory, :key
           service.mtime(full_path(key, directory), mtime)
         end
+
+        def rename(new_name)
+          requires :directory, :key
+          service.rename(full_path(key, directory), full_path(new_name, directory))
+          self.key = new_name
+          self.name = new_name
+        end
       end
     end
   end
