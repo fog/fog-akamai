@@ -29,6 +29,11 @@ module Fog
         def ready?
           true
         end
+
+        def touch(mtime = DateTime.now.to_time.to_i)
+          requires :directory, :key
+          service.mtime(full_path(key, directory), mtime)
+        end
       end
     end
   end
