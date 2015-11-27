@@ -3,7 +3,7 @@ module Fog
     class Akamai < Fog::Service
       requires :akamai_host, :akamai_key_name, :akamai_key, :akamai_cp_code
 
-      VALID_ACTIONS = [:dir, :mkdir, :download, :stat, :upload, :delete, :du]
+      VALID_ACTIONS = [:dir, :mkdir, :download, :stat, :upload, :delete, :du, :mtime]
       ACS_AUTH_DATA_HEADER = 'X-Akamai-ACS-Auth-Data'
       ACS_AUTH_SIGN_HEADER = 'X-Akamai-ACS-Auth-Sign'
       ACS_AUTH_ACTION_HEADER = 'X-Akamai-ACS-Action'
@@ -22,6 +22,7 @@ module Fog
       request :upload
       request :delete
       request :du
+      request :mtime
 
       module Helpers
         def format_path(path)
@@ -114,9 +115,11 @@ module Fog
         end
 
         def acs_action(action)
-          fail(ArgumentError, "Invalid action #{action} valid actions are: #{VALID_ACTIONS}") unless VALID_ACTIONS.include?(action)
+          action = { action: action } if action.is_a?(Symbol)
 
-          "version=1&action=#{action}&format=xml"
+          fail(ArgumentError, "Invalid action #{action} valid actions are: #{VALID_ACTIONS}") unless VALID_ACTIONS.include?(action[:action])
+
+          "version=1&#{action.map { |v, k| "#{v}=#{k}" }.join('&')}&format=xml"
         end
 
         def acs_auth_sign(auth_data, path, action)

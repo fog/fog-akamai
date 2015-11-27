@@ -36,6 +36,10 @@ module Fog
         assert_equal 'version=1&action=dir&format=xml', @storage.acs_action(:dir)
       end
 
+      def test_acs_action_with_a_hash_has_correct_format
+        assert_equal 'version=1&action=mtime&mtime=42&format=xml', @storage.acs_action(action: :mtime, mtime: 42)
+      end
+
       def test_acs_action_validates_actions
         assert_raises { @storage.acs_action(:gone_missing) }
       end
