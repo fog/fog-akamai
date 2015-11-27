@@ -3,7 +3,7 @@ module Fog
     class Akamai < Fog::Service
       requires :akamai_host, :akamai_key_name, :akamai_key, :akamai_cp_code
 
-      VALID_ACTIONS = [:dir, :mkdir, :download, :stat, :upload, :delete, :du, :mtime, :rename, :rmdir]
+      VALID_ACTIONS = [:dir, :mkdir, :download, :stat, :upload, :delete, :du, :mtime, :rename, :rmdir, :symlink]
       ACS_AUTH_DATA_HEADER = 'X-Akamai-ACS-Auth-Data'
       ACS_AUTH_SIGN_HEADER = 'X-Akamai-ACS-Auth-Sign'
       ACS_AUTH_ACTION_HEADER = 'X-Akamai-ACS-Action'
@@ -25,6 +25,7 @@ module Fog
       request :mtime
       request :rename
       request :rmdir
+      request :symlink
 
       module Helpers
         def format_path(path)
