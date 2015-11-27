@@ -2,7 +2,7 @@
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fog/storage`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-This is still under development only very basic net storage functionality has been put in place.
+All the functionality of the net storage api is implemented except the really dangerous bit, quick-delete.
 
 ## Installation
 
@@ -66,8 +66,6 @@ directory.files.create(directory: directory, body: file_body, key: file_name)
 
 ## Roadmap
 
-- finish implementing the netstorage api
-- add mock support
 - implement ccu api
 
 ## Development

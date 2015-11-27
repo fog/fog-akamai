@@ -11,7 +11,7 @@ module Fog
           path_guard(source)
           path_guard(target)
 
-          request({ action: :symlink, target: CGI.escape(format_path(target))},
+          request({ action: :symlink, target: CGI.escape(format_path(target)) },
                   path: format_path(source),
                   method: 'POST',
                   expects: 200)

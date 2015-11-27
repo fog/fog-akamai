@@ -20,6 +20,10 @@ module Fog
         assert_equal 2, storage.directories.get('/path').files.count
       end
 
+      def test_get_will_load_directories
+        assert_equal 3, storage.directories.get('/path').directories.count
+      end
+
       def test_get_will_set_the_directory
         directory = storage.directories.get('/path')
         assert_equal [directory, directory], directory.files.map(&:directory)

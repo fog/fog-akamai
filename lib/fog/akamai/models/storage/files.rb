@@ -10,6 +10,7 @@ module Fog
 
         def all
           requires :directory
+          directory.files
         end
 
         def get(path)
