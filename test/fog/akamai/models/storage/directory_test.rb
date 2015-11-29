@@ -30,6 +30,14 @@ module Fog
 
         assert_requested mkdir
       end
+
+      def test_save_with_no_parent_will_call_mkdir_with_the_correct_path
+        mkdir = stub_mkdir('/42/path/unborn')
+
+        storage.directories.create(key: '/path/unborn')
+
+        assert_requested mkdir
+      end
     end
   end
 end
