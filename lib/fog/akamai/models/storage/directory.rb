@@ -25,8 +25,9 @@ module Fog
         end
 
         def save
-          requires :key, :parent
-          service.mkdir(full_path(key, parent))
+          requires :key
+          path = parent.nil? ? key : full_path(key, parent)
+          service.mkdir(path)
         end
 
         def destroy
