@@ -25,7 +25,7 @@ Or install it yourself as:
 Before you can use fog-akamai, you must require it in your application:
 
 ```ruby
-require 'fog/aws'
+require 'fog/akamai'
 ```
 
 Since it's a bad practice to have your credentials in source code, you should load them from default fog configuration file: ```~/.fog```. This file could look like this:
