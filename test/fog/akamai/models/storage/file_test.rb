@@ -18,10 +18,8 @@ module Fog
         stub_upload = stub_upload('/42/path/test2.jpg')
 
         body = File.open(File.expand_path('../../../../.../../../assets/test2.jpg', __FILE__))
-        directory = storage.directories.get('/path')
-        directory.files.create(
+        storage.directories.get('/path').files.create(
           key: 'test2.jpg',
-          directory: directory,
           body: body
         )
 

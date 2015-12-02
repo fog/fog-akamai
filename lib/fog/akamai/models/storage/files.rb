@@ -23,6 +23,11 @@ module Fog
         rescue Excon::Errors::NotFound
           nil
         end
+
+        def new(attributes = {})
+          requires :directory
+          super({ :directory => directory }.merge!(attributes))
+        end
       end
     end
   end
