@@ -21,6 +21,10 @@ module Fog
           directory
         end
 
+        def new(attributes)
+          super({ parent: parent }.merge!(attributes))
+        end
+
         private
 
         def load_files(directory, data)

@@ -25,8 +25,7 @@ module Fog
         stub_dir('/42/path')
         mkdir = stub_mkdir('/42/path/unborn')
 
-        directory = storage.directories.get('/path')
-        directory.directories.create(key: 'unborn', parent: directory)
+        storage.directories.get('/path').directories.create(key: 'unborn')
 
         assert_requested mkdir
       end
