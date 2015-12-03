@@ -25,7 +25,6 @@ module Fog
         end
 
         def new(attributes = {})
-          requires :directory
           super({ directory: directory }.merge!(attributes))
         end
       end
