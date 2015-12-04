@@ -3,6 +3,7 @@ require 'helpers/download_request_stub'
 require 'helpers/dir_request_stub'
 require 'helpers/stat_request_stub'
 require 'fog/akamai/storage_test_base'
+require 'helpers/upload_request_stub'
 
 module Fog
   module Storage
@@ -10,6 +11,7 @@ module Fog
       include DownloadRequestStub
       include DirRequestStub
       include StatRequestStub
+      include UploadRequestStub
 
       attr_reader :file
 
@@ -37,6 +39,12 @@ module Fog
       def test_stat_with_non_existing_file
         stub_stat('/42/path/test3.jpg', 404)
         assert_nil storage.files.stat('/path/test3.jpg')
+      end
+
+      def test_create_without_a_directory
+        stub_upload = stub_upload('/42/path/test.txt')
+        storage.files.create(key: '/path/test.txt', body: '42')
+        assert_requested stub_upload
       end
     end
   end
