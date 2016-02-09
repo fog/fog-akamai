@@ -1,5 +1,7 @@
 [![Code Climate](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/badges/gpa.svg)](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai)
 
+[![Test Coverage](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/badges/coverage.svg)](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/coverage)
+
 # Fog Akamai
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fog/storage`. To experiment with that code, run `bin/console` for an interactive prompt.
