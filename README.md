@@ -1,6 +1,6 @@
-[![Code Climate](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/badges/gpa.svg)](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai)
+[![Code Climate](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/badges/gpa.svg)](https://codeclimate.com/github/fog/fog-akamai)
 
-[![Test Coverage](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/badges/coverage.svg)](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/coverage)
+[![Test Coverage](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/badges/coverage.svg)](https://codeclimate.com/github/fog/fog-akamai/coverage)
 
 # Fog Akamai
 
