@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+require 'cgi/escape'
+
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to rename a file or symbolic link.
         # @param source [String] the path to check
@@ -18,8 +22,8 @@ module Fog
         end
       end
 
-      class Mock
-      end
+      # There is no Mock#symlink yet, so fog-core raises Fog::Errors::MockNotImplemented in mock mode.
+      # See https://github.com/fog/fog-akamai/issues/3
     end
   end
 end

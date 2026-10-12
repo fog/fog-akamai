@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
+require 'cgi/escape'
 require 'pathname'
 
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to rename a file or symbolic link.
         # @param source [String] the path to check
@@ -28,12 +31,10 @@ module Fog
           source_pathname = Pathname.new(format_path(source))
           destination_pathname = Pathname.new(format_path(destination))
 
-          if rename_file(source_pathname, destination_pathname)
-            move_file(source_pathname, destination_pathname)
-            Excon::Response.new(status: 200)
-          else
-            fail(Excon::Errors::NotFound, '404 Not Found')
-          end
+          raise(Excon::Errors::NotFound, '404 Not Found') unless rename_file(source_pathname, destination_pathname)
+
+          move_file(source_pathname, destination_pathname)
+          Excon::Response.new(status: 200)
         end
 
         private

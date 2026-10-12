@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/reporters'
 
-MiniTest::Reporters.use!
+Minitest::Reporters.use!

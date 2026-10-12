@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         require 'fog/akamai/parsers/storage/du'
 
@@ -19,7 +21,7 @@ module Fog
                   path: format_path(path),
                   method: 'GET',
                   expects: 200,
-                  parser: Fog::Parsers::Storage::Akamai::Du.new)
+                  parser: Fog::Parsers::Akamai::Storage::Du.new)
         end
       end
 
@@ -30,11 +32,9 @@ module Fog
           key = format_path(path)
           directory = data[key]
 
-          if directory
-            Excon::Response.new(status: 200, body: { directory: key, files: directory[:files].count.to_s, bytes: directory[:directories].count.to_s })
-          else
-            fail(Excon::Errors::NotFound, '404 Not Found')
-          end
+          raise(Excon::Errors::NotFound, '404 Not Found') unless directory
+
+          Excon::Response.new(status: 200, body: { directory: key, files: directory[:files].count.to_s, bytes: directory[:directories].count.to_s })
         end
       end
     end

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 module Fog
   module Akamai
     class StorageTest < Minitest::Test
       def setup
-        @storage = Fog::Storage::Akamai.new(
+        @storage = Fog::Akamai::Storage.new(
           akamai_host: 'example-nsu.akamai.net',
           akamai_key_name: 'key_name',
           akamai_key: 'key',
@@ -13,7 +15,7 @@ module Fog
       end
 
       def test_that_if_all_require_params_it_will_init
-        assert_instance_of Fog::Storage::Akamai::Real, @storage
+        assert_instance_of Fog::Akamai::Storage::Real, @storage
       end
 
       def test_format_path_will_prefix_with_the_cp_code

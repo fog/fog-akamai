@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'helpers/delete_request_stub'
 require 'fog/akamai/storage_test_base'

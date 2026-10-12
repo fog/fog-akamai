@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'helpers/rmdir_request_stub'
 require 'fog/akamai/storage_test_base'
@@ -21,7 +23,7 @@ module Fog
         assert_nil storage.data['/42/path']
       end
 
-      def test_rmdir_with_a_not_empty_dir_will_raise_request_conflict_409
+      def test_rmdir_with_a_not_empty_dir_will_raise_request_conflict
         storage.upload('/path/dream.mkv', 'clocks')
         assert_raises(Excon::Errors::Conflict) { storage.rmdir('/path') }
       end

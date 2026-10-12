@@ -1,12 +1,12 @@
-[![Code Climate](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/badges/gpa.svg)](https://codeclimate.com/github/fog/fog-akamai)
-
-[![Test Coverage](https://codeclimate.com/github/alexandru-calinoiu/fog-akamai/badges/coverage.svg)](https://codeclimate.com/github/fog/fog-akamai/coverage)
+[![CI](https://github.com/fog/fog-akamai/actions/workflows/ci.yml/badge.svg)](https://github.com/fog/fog-akamai/actions/workflows/ci.yml)
 
 # Fog Akamai
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fog/storage`. To experiment with that code, run `bin/console` for an interactive prompt.
+A [fog](https://github.com/fog/fog) provider for Akamai NetStorage, built on the ObjectStore HTTP API (the spec is in `docs/NS_http_api_FS.pdf`).
 
-All the functionality of the net storage api is implemented except the really dangerous bit, quick-delete.
+All the functionality of the NetStorage API is implemented except the really dangerous bit, quick-delete.
+
+Requires Ruby 3.3 or newer and fog-core 2.x.
 
 ## Installation
 
@@ -47,7 +47,19 @@ You can get more detail about how to obtain this credential form [this doc](http
 ### Connecting to NetStorage service
 
 ```ruby
-net_storage = Fog::Compute.new :provider => 'akamai'
+net_storage = Fog::Storage.new(provider: 'akamai')
+```
+
+You can also pass the credentials explicitly:
+
+```ruby
+net_storage = Fog::Storage.new(
+  provider: 'akamai',
+  akamai_host: '<YOUR_AKAMAIHOST>',
+  akamai_key_name: '<YOUR_KEY_NAME>',
+  akamai_key: '<YOU_KEY>',
+  akamai_cp_code: '<YOU_CP_CODE>'
+)
 ```
 
 ### To get a directory:
@@ -68,17 +80,20 @@ directory.files.stat('file.ext')
 directory.files.create(directory: directory, body: file_body, key: file_name)
 ```
 
+### Upgrading from 0.5
+
+The service class is now `Fog::Akamai::Storage`. `Fog::Storage::Akamai` still works but is deprecated and will be removed in a future major release. If you only use `Fog::Storage.new(provider: 'akamai')` nothing changes. See the [changelog](CHANGELOG.md) for the other changes.
+
 ## Roadmap
 
 - implement ccu api
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rake` to run the tests and RuboCop (`bundle exec rake test` runs only the tests). You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb` and the changelog, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/alexandru-calinoiu/fog-akamai.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/fog/fog-akamai.

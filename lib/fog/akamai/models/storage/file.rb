@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class File < Fog::Model
         include Fog::Akamai::Shared
 
@@ -30,7 +32,7 @@ module Fog
           true
         end
 
-        def touch(mtime = DateTime.now.to_time.to_i)
+        def touch(mtime = Time.now.to_i)
           requires :directory, :key
           service.mtime(full_path(key, directory), mtime)
         end

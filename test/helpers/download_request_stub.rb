@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module DownloadRequestStub
   def download_body
-    File.read(File.expand_path('../../assets/test2.jpg', __FILE__))
+    File.read(File.expand_path('../assets/test2.jpg', __dir__))
   end
 
   def stub_download(path, status = 200)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'helpers/upload_request_stub'
 require 'timecop'
@@ -7,7 +9,7 @@ module Fog
   module Storage
     module UploadTestHelper
       def body
-        @body ||= File.open(File.expand_path('../../../../.../../../assets/test2.jpg', __FILE__))
+        @body ||= File.open(File.expand_path('../../../.../../../assets/test2.jpg', __dir__))
       end
     end
 
@@ -19,6 +21,11 @@ module Fog
         stub_upload = stub_upload('/42/path/test2.jpg')
         storage.upload('/path/test2.jpg', body)
         assert_requested stub_upload
+      end
+
+      def test_upload_requires_a_body
+        error = assert_raises(ArgumentError) { storage.upload('/path/test2.jpg', nil) }
+        assert_equal 'body is required', error.message
       end
     end
 

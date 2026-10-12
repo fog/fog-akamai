@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Fog
   module Parsers
-    module Storage
-      module Akamai
+    module Akamai
+      module Storage
         class Du < Fog::Parsers::Base
           def reset
             @response = { directory: '', files: '', bytes: '' }

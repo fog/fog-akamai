@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'helpers/download_request_stub'
 require 'helpers/dir_request_stub'
@@ -17,7 +19,7 @@ module Fog
 
       def setup
         super
-        @file = File.read(File.expand_path('../../../../.../../../assets/test2.jpg', __FILE__))
+        @file = File.read(File.expand_path('../../../.../../../assets/test2.jpg', __dir__))
       end
 
       def test_get

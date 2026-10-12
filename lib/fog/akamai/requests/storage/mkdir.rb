@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'pathname'
 
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to create a dir
         # @param path [String] the path to create, it will create directories recursively
@@ -13,8 +15,7 @@ module Fog
           request(:mkdir,
                   path: format_path(path),
                   method: 'PUT',
-                  expects: 200
-                 )
+                  expects: 200)
         end
       end
 
@@ -44,7 +45,7 @@ module Fog
         end
 
         def build_directory_node(last_path_basename)
-          { 'type' => 'dir', 'name' => last_path_basename, 'mtime' => DateTime.now.to_time.to_i.to_s }
+          { 'type' => 'dir', 'name' => last_path_basename, 'mtime' => Time.now.to_i.to_s }
         end
       end
     end

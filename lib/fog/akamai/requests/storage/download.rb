@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to download a file
         # @param path [String] the path for the file that will be downloaded
@@ -20,7 +22,8 @@ module Fog
         def download(path)
           path_guard(path)
           formatted_path = format_path(path)
-          fail(Excon::Errors::NotFound, '404 Not Found') unless data.key?(formatted_path) && data[formatted_path].key?(:body)
+          raise(Excon::Errors::NotFound, '404 Not Found') unless data.key?(formatted_path) && data[formatted_path].key?(:body)
+
           Excon::Response.new(status: 200, body: data[formatted_path][:body])
         end
       end

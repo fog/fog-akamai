@@ -1,4 +1,9 @@
-Metrics/LineLength:
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
+  SuggestExtensions: false
+
+Layout/LineLength:
   Max: 160
 
 Style/Documentation:

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Excon.defaults.merge!(debug_request: true, debug_response: true)
 
 Fog.credentials = {

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'pathname'
 
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         require 'fog/akamai/parsers/storage/dir'
 
@@ -28,7 +30,7 @@ module Fog
                   path: format_path(path),
                   method: 'GET',
                   expects: 200,
-                  parser: Fog::Parsers::Storage::Akamai::Dir.new)
+                  parser: Fog::Parsers::Akamai::Storage::Dir.new)
         end
       end
 
@@ -41,7 +43,8 @@ module Fog
 
           response = Excon::Response.new(status: get_status(key, path.basename.to_s), body: get_body(key))
 
-          fail(Excon::Errors::NotFound, '404 Not Found') if response.status == 404
+          raise(Excon::Errors::NotFound, '404 Not Found') if response.status == 404
+
           response
         end
 

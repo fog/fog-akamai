@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'pathname'
 
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to delete an individual file or symbolic link.
         # @param path [String] the path for the file that will be downloaded
@@ -21,11 +23,9 @@ module Fog
         def delete(path)
           path_guard(path)
 
-          if remove_file(Pathname.new(format_path(path)))
-            Excon::Response.new(status: 200)
-          else
-            fail(Excon::Errors::NotFound, '404 Not Found')
-          end
+          raise(Excon::Errors::NotFound, '404 Not Found') unless remove_file(Pathname.new(format_path(path)))
+
+          Excon::Response.new(status: 200)
         end
 
         private

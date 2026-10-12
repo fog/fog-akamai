@@ -1,9 +1,14 @@
+# frozen_string_literal: true
+
+require 'openssl'
+require 'securerandom'
+
 module Fog
-  module Storage
-    class Akamai < Fog::Service
+  module Akamai
+    class Storage < Fog::Service
       requires :akamai_host, :akamai_key_name, :akamai_key, :akamai_cp_code
 
-      VALID_ACTIONS = [:dir, :mkdir, :download, :stat, :upload, :delete, :du, :mtime, :rename, :rmdir, :symlink]
+      VALID_ACTIONS = %i[dir mkdir download stat upload delete du mtime rename rmdir symlink].freeze
       ACS_AUTH_DATA_HEADER = 'X-Akamai-ACS-Auth-Data'
       ACS_AUTH_SIGN_HEADER = 'X-Akamai-ACS-Auth-Sign'
       ACS_AUTH_ACTION_HEADER = 'X-Akamai-ACS-Action'
@@ -34,11 +39,11 @@ module Fog
 
         def path_and_body_guard(path, body)
           path_guard(path)
-          fail ArgumentError('body is required') if body.nil?
+          raise(ArgumentError, 'body is required') if body.nil?
         end
 
         def path_guard(path)
-          fail(ArgumentError, 'path needs to have a value') if path.nil? || path.empty?
+          raise(ArgumentError, 'path needs to have a value') if path.nil? || path.empty?
         end
       end
 
@@ -92,7 +97,8 @@ module Fog
         # :akamai_key and :akamai_cp_code in order to create a connection
         #
         # ==== Examples
-        #   akamai_storage = Storage.new(
+        #   akamai_storage = Fog::Storage.new(
+        #     :provider => 'akamai',
         #     :akamai_host => your_akamai_host_name,
         #     :akamai_key_name => you_akamai_key_name,
         #     :akamai_key => you_akamai_key,
@@ -120,15 +126,15 @@ module Fog
         def acs_action(action)
           action = { action: action } if action.is_a?(Symbol)
 
-          fail(ArgumentError, "Invalid action #{action} valid actions are: #{VALID_ACTIONS}") unless VALID_ACTIONS.include?(action[:action])
+          raise(ArgumentError, "Invalid action #{action} valid actions are: #{VALID_ACTIONS}") unless VALID_ACTIONS.include?(action[:action])
 
           "version=1&#{action.map { |v, k| "#{v}=#{k}" }.join('&')}&format=xml"
         end
 
         def acs_auth_sign(auth_data, path, action)
           data = auth_data + sign_string(path, action)
-          digest = OpenSSL::Digest::Digest::SHA256.new
-          Base64.encode64(OpenSSL::HMAC.digest(digest, akamai_key, data)).strip
+          digest = OpenSSL::Digest.new('SHA256')
+          [OpenSSL::HMAC.digest(digest, akamai_key, data)].pack('m0')
         end
 
         private
@@ -155,5 +161,11 @@ module Fog
         end
       end
     end
+  end
+
+  module Storage
+    # Deprecated alias for the pre-0.6 constant name; use Fog::Akamai::Storage.
+    Akamai = Fog::Akamai::Storage
+    deprecate_constant :Akamai
   end
 end

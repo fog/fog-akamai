@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Directory < Fog::Model
         include Fog::Akamai::Shared
 
@@ -11,14 +13,14 @@ module Fog
         attribute :mtime
 
         def files
-          @files ||= Fog::Storage::Akamai::Files.new(
+          @files ||= Fog::Akamai::Storage::Files.new(
             directory: self,
             service: service
           )
         end
 
         def directories
-          @directories ||= Fog::Storage::Akamai::Directories.new(
+          @directories ||= Fog::Akamai::Storage::Directories.new(
             parent: self,
             service: service
           )
