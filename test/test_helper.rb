@@ -1,8 +1,13 @@
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'simplecov'
+
+SimpleCov.start do
+  skip '/test/'
+end
+
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 
 require 'minitest/autorun'
+require 'minitest/mock'
 require 'fog/akamai'
-require "codeclimate-test-reporter"
 
-CodeClimate::TestReporter.start
-Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |rb| require(rb) }
+Dir[File.expand_path('support/**/*.rb', __dir__)].each { |rb| require(rb) }

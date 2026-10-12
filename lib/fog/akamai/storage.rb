@@ -1,3 +1,6 @@
+require 'openssl'
+require 'securerandom'
+
 module Fog
   module Storage
     class Akamai < Fog::Service
@@ -34,7 +37,7 @@ module Fog
 
         def path_and_body_guard(path, body)
           path_guard(path)
-          fail ArgumentError('body is required') if body.nil?
+          fail(ArgumentError, 'body is required') if body.nil?
         end
 
         def path_guard(path)
@@ -127,8 +130,8 @@ module Fog
 
         def acs_auth_sign(auth_data, path, action)
           data = auth_data + sign_string(path, action)
-          digest = OpenSSL::Digest::Digest::SHA256.new
-          Base64.encode64(OpenSSL::HMAC.digest(digest, akamai_key, data)).strip
+          digest = OpenSSL::Digest.new('SHA256')
+          [OpenSSL::HMAC.digest(digest, akamai_key, data)].pack('m0')
         end
 
         private

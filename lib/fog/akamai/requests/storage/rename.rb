@@ -1,3 +1,4 @@
+require 'cgi/escape'
 require 'pathname'
 
 module Fog

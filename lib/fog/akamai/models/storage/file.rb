@@ -30,7 +30,7 @@ module Fog
           true
         end
 
-        def touch(mtime = DateTime.now.to_time.to_i)
+        def touch(mtime = Time.now.to_i)
           requires :directory, :key
           service.mtime(full_path(key, directory), mtime)
         end

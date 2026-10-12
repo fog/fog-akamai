@@ -20,6 +20,11 @@ module Fog
         storage.upload('/path/test2.jpg', body)
         assert_requested stub_upload
       end
+
+      def test_upload_requires_a_body
+        error = assert_raises(ArgumentError) { storage.upload('/path/test2.jpg', nil) }
+        assert_equal 'body is required', error.message
+      end
     end
 
     class MockUploadTest < MockStorageTestBase

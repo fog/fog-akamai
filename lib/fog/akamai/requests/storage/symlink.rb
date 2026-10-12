@@ -1,3 +1,5 @@
+require 'cgi/escape'
+
 module Fog
   module Storage
     class Akamai

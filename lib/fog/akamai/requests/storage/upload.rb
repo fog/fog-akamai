@@ -43,7 +43,7 @@ module Fog
         end
 
         def build_file(body, path)
-          { 'type' => 'file', 'name' => path.basename.to_s, 'mtime' => DateTime.now.to_time.to_i.to_s, 'size' => body.size.to_s }
+          { 'type' => 'file', 'name' => path.basename.to_s, 'mtime' => Time.now.to_i.to_s, 'size' => body.size.to_s }
         end
       end
     end

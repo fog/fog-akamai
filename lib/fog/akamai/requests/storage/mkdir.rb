@@ -44,7 +44,7 @@ module Fog
         end
 
         def build_directory_node(last_path_basename)
-          { 'type' => 'dir', 'name' => last_path_basename, 'mtime' => DateTime.now.to_time.to_i.to_s }
+          { 'type' => 'dir', 'name' => last_path_basename, 'mtime' => Time.now.to_i.to_s }
         end
       end
     end

@@ -16,3 +16,4 @@ tests/.fog
 # RubyMine IDE
 /.idea
 .fog
+*.gem

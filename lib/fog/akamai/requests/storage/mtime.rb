@@ -9,7 +9,7 @@ module Fog
         # @param mtime [int] the desired modification time for the target content (i.e., in UNIX epoch time).
         # @return [Excon::Response] response
 
-        def mtime(path, mtime = DateTime.now.to_time.to_i)
+        def mtime(path, mtime = Time.now.to_i)
           path_guard(path)
           request({ action: :mtime, mtime: mtime },
                   path: format_path(path),
@@ -19,7 +19,7 @@ module Fog
       end
 
       class Mock
-        def mtime(path, mtime = DateTime.now.to_time.to_i)
+        def mtime(path, mtime = Time.now.to_i)
           path_guard(path)
 
           pathname = Pathname.new(format_path(path))
