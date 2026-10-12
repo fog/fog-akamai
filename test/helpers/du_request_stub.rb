@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DuRequestStub
   def du_body(path, files, bytes)
     "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>

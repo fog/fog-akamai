@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Fog
   module Akamai
     class Storage
@@ -31,7 +33,7 @@ module Fog
       class Mock
         def dir(path = '')
           key = format_path(path)
-          data.key?(key) ? Excon::Response.new(status: 200, body: data[key]) : fail(Excon::Errors::NotFound, '404 Not Found')
+          data.key?(key) ? Excon::Response.new(status: 200, body: data[key]) : raise(Excon::Errors::NotFound, '404 Not Found')
         end
       end
     end

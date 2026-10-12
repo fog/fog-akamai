@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pathname'
 
 module Fog
@@ -21,11 +23,9 @@ module Fog
         def delete(path)
           path_guard(path)
 
-          if remove_file(Pathname.new(format_path(path)))
-            Excon::Response.new(status: 200)
-          else
-            fail(Excon::Errors::NotFound, '404 Not Found')
-          end
+          raise(Excon::Errors::NotFound, '404 Not Found') unless remove_file(Pathname.new(format_path(path)))
+
+          Excon::Response.new(status: 200)
         end
 
         private

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'helpers/upload_request_stub'
 require 'timecop'
@@ -7,7 +9,7 @@ module Fog
   module Storage
     module UploadTestHelper
       def body
-        @body ||= File.open(File.expand_path('../../../../.../../../assets/test2.jpg', __FILE__))
+        @body ||= File.open(File.expand_path('../../../.../../../assets/test2.jpg', __dir__))
       end
     end
 

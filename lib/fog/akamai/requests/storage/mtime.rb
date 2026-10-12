@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pathname'
 
 module Fog
@@ -25,12 +27,10 @@ module Fog
           pathname = Pathname.new(format_path(path))
           file = get_file(pathname)
 
-          if file
-            file['mtime'] = mtime.to_s
-            Excon::Response.new(status: 200)
-          else
-            fail(Excon::Errors::NotFound, '404 Not Found')
-          end
+          raise(Excon::Errors::NotFound, '404 Not Found') unless file
+
+          file['mtime'] = mtime.to_s
+          Excon::Response.new(status: 200)
         end
 
         private

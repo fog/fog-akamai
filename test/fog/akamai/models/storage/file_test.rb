@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'helpers/dir_request_stub'
 require 'helpers/upload_request_stub'
@@ -17,11 +19,12 @@ module Fog
         stub_dir('/42/path')
         stub_upload = stub_upload('/42/path/test2.jpg')
 
-        body = File.open(File.expand_path('../../../../.../../../assets/test2.jpg', __FILE__))
-        storage.directories.get('/path').files.create(
-          key: 'test2.jpg',
-          body: body
-        )
+        File.open(File.expand_path('../../../.../../../assets/test2.jpg', __dir__)) do |body|
+          storage.directories.get('/path').files.create(
+            key: 'test2.jpg',
+            body: body
+          )
+        end
 
         assert_requested stub_upload
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Fog
   module Akamai
     class Storage
@@ -22,12 +24,10 @@ module Fog
           formatted_path = format_path(path)
           dir = data[formatted_path]
 
-          if empty?(dir)
-            data.delete(formatted_path)
-            Excon::Response.new(status: 200)
-          else
-            fail(Excon::Errors::Conflict, 'Not a empty directory')
-          end
+          raise(Excon::Errors::Conflict, 'Not a empty directory') unless empty?(dir)
+
+          data.delete(formatted_path)
+          Excon::Response.new(status: 200)
         end
 
         private

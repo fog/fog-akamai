@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pathname'
 
 module Fog
@@ -41,7 +43,8 @@ module Fog
 
           response = Excon::Response.new(status: get_status(key, path.basename.to_s), body: get_body(key))
 
-          fail(Excon::Errors::NotFound, '404 Not Found') if response.status == 404
+          raise(Excon::Errors::NotFound, '404 Not Found') if response.status == 404
+
           response
         end
 

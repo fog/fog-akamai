@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Fog
   module Akamai
     class Storage
@@ -30,11 +32,9 @@ module Fog
           key = format_path(path)
           directory = data[key]
 
-          if directory
-            Excon::Response.new(status: 200, body: { directory: key, files: directory[:files].count.to_s, bytes: directory[:directories].count.to_s })
-          else
-            fail(Excon::Errors::NotFound, '404 Not Found')
-          end
+          raise(Excon::Errors::NotFound, '404 Not Found') unless directory
+
+          Excon::Response.new(status: 200, body: { directory: key, files: directory[:files].count.to_s, bytes: directory[:directories].count.to_s })
         end
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'helpers/download_request_stub'
 require 'fog/akamai/storage_test_base'
@@ -20,11 +22,8 @@ module Fog
     end
 
     class MockDownloadTest < MockStorageTestBase
-      attr_reader :body
-
-      def setup
-        super
-        @body ||= File.open(File.expand_path('../../../../.../../../assets/test2.jpg', __FILE__))
+      def body
+        @body ||= File.open(File.expand_path('../../../.../../../assets/test2.jpg', __dir__))
       end
 
       def test_with_a_uploaded_file

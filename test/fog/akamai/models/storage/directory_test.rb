@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'helpers/dir_request_stub'
 require 'helpers/rmdir_request_stub'

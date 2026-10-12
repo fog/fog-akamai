@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pathname'
 
 module Fog
@@ -13,8 +15,7 @@ module Fog
           request(:mkdir,
                   path: format_path(path),
                   method: 'PUT',
-                  expects: 200
-                 )
+                  expects: 200)
         end
       end
 
