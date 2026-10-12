@@ -1,10 +1,10 @@
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Files < Fog::Collection
         include Fog::Akamai::Shared
 
-        model Fog::Storage::Akamai::File
+        model Fog::Akamai::Storage::File
 
         attribute :directory
 

@@ -3,12 +3,10 @@ require 'fog/xml'
 require 'fog/akamai/version'
 
 module Fog
-  module Storage
-    autoload :Akamai, 'fog/akamai/storage'
-  end
-
   module Akamai
     extend Fog::Provider
+
+    autoload :Storage, 'fog/akamai/storage'
 
     service(:storage, 'Storage')
 
@@ -18,5 +16,10 @@ module Fog
         path
       end
     end
+  end
+
+  module Storage
+    # Deprecated: use Fog::Akamai::Storage. The alias is defined in fog/akamai/storage.
+    autoload :Akamai, 'fog/akamai/storage'
   end
 end

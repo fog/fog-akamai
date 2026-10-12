@@ -1,8 +1,8 @@
 require 'pathname'
 
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to delete an individual file or symbolic link.
         # @param path [String] the path for the file that will be downloaded

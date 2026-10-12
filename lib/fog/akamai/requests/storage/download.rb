@@ -1,6 +1,6 @@
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to download a file
         # @param path [String] the path for the file that will be downloaded

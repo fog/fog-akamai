@@ -1,6 +1,6 @@
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to delete an empty directory.
         # @param path [String] the path to the directory

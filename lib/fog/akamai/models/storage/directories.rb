@@ -1,8 +1,8 @@
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Directories < Fog::Collection
-        model Fog::Storage::Akamai::Directory
+        model Fog::Akamai::Storage::Directory
 
         attribute :parent
 

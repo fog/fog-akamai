@@ -1,8 +1,8 @@
 require 'pathname'
 
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to create a dir
         # @param path [String] the path to create, it will create directories recursively

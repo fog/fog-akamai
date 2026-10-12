@@ -1,8 +1,8 @@
 require 'cgi/escape'
 
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to rename a file or symbolic link.
         # @param source [String] the path to check

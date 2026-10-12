@@ -1,7 +1,7 @@
 module Fog
   module Parsers
-    module Storage
-      module Akamai
+    module Akamai
+      module Storage
         class Dir < Fog::Parsers::Base
           def reset
             @response = { directory: '', files: [], directories: [] }

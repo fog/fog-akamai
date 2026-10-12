@@ -1,8 +1,8 @@
 require 'pathname'
 
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         require 'fog/akamai/parsers/storage/dir'
 
@@ -28,7 +28,7 @@ module Fog
                   path: format_path(path),
                   method: 'GET',
                   expects: 200,
-                  parser: Fog::Parsers::Storage::Akamai::Dir.new)
+                  parser: Fog::Parsers::Akamai::Storage::Dir.new)
         end
       end
 

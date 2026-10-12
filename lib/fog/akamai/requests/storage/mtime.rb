@@ -1,8 +1,8 @@
 require 'pathname'
 
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class Real
         # Use this action to change a file's modification time ("touch").
         # @param path [String] the path for he file that will be downloaded

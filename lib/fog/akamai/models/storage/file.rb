@@ -1,6 +1,6 @@
 module Fog
-  module Storage
-    class Akamai
+  module Akamai
+    class Storage
       class File < Fog::Model
         include Fog::Akamai::Shared
 

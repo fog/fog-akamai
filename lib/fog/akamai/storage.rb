@@ -2,8 +2,8 @@ require 'openssl'
 require 'securerandom'
 
 module Fog
-  module Storage
-    class Akamai < Fog::Service
+  module Akamai
+    class Storage < Fog::Service
       requires :akamai_host, :akamai_key_name, :akamai_key, :akamai_cp_code
 
       VALID_ACTIONS = [:dir, :mkdir, :download, :stat, :upload, :delete, :du, :mtime, :rename, :rmdir, :symlink]
@@ -95,7 +95,8 @@ module Fog
         # :akamai_key and :akamai_cp_code in order to create a connection
         #
         # ==== Examples
-        #   akamai_storage = Storage.new(
+        #   akamai_storage = Fog::Storage.new(
+        #     :provider => 'akamai',
         #     :akamai_host => your_akamai_host_name,
         #     :akamai_key_name => you_akamai_key_name,
         #     :akamai_key => you_akamai_key,
@@ -158,5 +159,11 @@ module Fog
         end
       end
     end
+  end
+
+  module Storage
+    # Deprecated alias for the pre-0.6 constant name; use Fog::Akamai::Storage.
+    Akamai = Fog::Akamai::Storage
+    deprecate_constant :Akamai
   end
 end
