@@ -17,3 +17,4 @@ tests/.fog
 /.idea
 .fog
 *.gem
+/gemfiles/*.lock
